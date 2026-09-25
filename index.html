@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102a43">
+<title>Azzurro Reception Hub</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brandMark">A</div><div><h1>Azzurro Hotels</h1><p>Reception Hub</p></div></div>
+  <div class="today" id="today"></div>
+</header>
+
+<div class="appShell">
+  <aside class="propertyRail">
+    <div class="railLabel">PROPERTIES</div>
+    <nav id="propertyNav" aria-label="Properties"></nav>
+  </aside>
+
+  <main>
+    <section id="taskView">
+      <div class="pageHead">
+        <div><span class="eyebrow">PROPERTY</span><h2 id="propertyTitle"></h2><p id="propertySummary">Receptionist deadlines and guest tools.</p></div>
+        <div id="counts"></div>
+      </div>
+      <div class="actionStrip" id="timeTabs"></div>
+      <div id="taskPanel"></div>
+    </section>
+
+    <section id="checkinView" hidden>
+      <div class="pageHead"><div><span class="eyebrow" id="ciEyebrow">CHECK-IN</span><h2 id="ciHeading">Guest Check-In</h2><p id="ciHelp"></p></div><button class="backBtn" data-home>← Back to tasks</button></div>
+      <div class="workspace">
+        <div class="panel formPanel">
+          <div class="panelTitle">Guest details</div>
+          <div class="formGrid">
+            <label>Guest Name<input id="ciGuest" placeholder="Guest name"></label>
+            <label>Receptionist Name<input id="ciReceptionist" placeholder="Receptionist name"></label>
+            <label>Room Number<input id="ciRoom" inputmode="numeric" placeholder="Room number"></label>
+            <label id="ciBedLabel">Bed Number<input id="ciBed" placeholder="Bed number"></label>
+            <label id="ciRoomPinLabel">Room PIN<input id="ciRoomPin" placeholder="Room PIN"></label>
+            <label id="ciDoorLabel">Main Door Code<input id="ciDoor" placeholder="Door code"></label>
+          </div>
+          <div id="ciOlympicInfo" class="infoBox" hidden></div>
+        </div>
+        <div id="ciResultCard" class="panel messagePanel" hidden>
+          <div class="panelTitleRow"><div><span class="eyebrow">READY TO SEND</span><h3 id="ciResultTitle"></h3></div><button id="ciCopy" class="primary">Copy Message</button></div>
+          <textarea id="ciResult" rows="24" readonly></textarea><p class="copyStatus" id="ciCopyStatus"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="extensionView" hidden>
+      <div class="pageHead"><div><span class="eyebrow" id="extEyebrow">EXTENSION</span><h2 id="extHeading">Guest Extension</h2><p>Choose the extension type and enter the updated access details.</p></div><button class="backBtn" data-home>← Back to tasks</button></div>
+      <div class="workspace">
+        <div class="panel formPanel">
+          <div class="panelTitle">Extension details</div>
+          <div class="formGrid">
+            <label class="full">Extension Type<select id="extType"><option value="same">Same Room &amp; Bed</option><option value="moved">Moved Bed</option></select></label>
+            <label>Guest Name<input id="extGuest" placeholder="Guest name"></label>
+            <label>Room Number<input id="extRoom" placeholder="Room number"></label>
+            <label>Bed Number<input id="extBed" placeholder="Bed number"></label>
+            <label>Room PIN<input id="extRoomPin" placeholder="Room PIN"></label>
+            <label>Main Door PIN<input id="extDoor" placeholder="Main Door PIN"></label>
+            <label>Goki Confirmation / Code<input id="extGoki" placeholder="Goki confirmation or code"></label>
+          </div>
+        </div>
+        <div id="extResultCard" class="panel messagePanel" hidden>
+          <div class="panelTitleRow"><div><span class="eyebrow">READY TO SEND</span><h3 id="extResultTitle"></h3></div><button id="extCopy" class="primary">Copy Message</button></div>
+          <textarea id="extResult" rows="22" readonly></textarea><p class="copyStatus" id="extCopyStatus"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviewView" hidden>
+      <div class="pageHead"><div><span class="eyebrow" id="reviewEyebrow">GOOGLE REVIEW</span><h2 id="reviewHeading">Google Review Request</h2><p>Enter the names and the correct property review link is added automatically.</p></div><button class="backBtn" data-home>← Back to tasks</button></div>
+      <div class="workspace compactWorkspace">
+        <div class="panel formPanel"><div class="panelTitle">Review request</div><div class="formGrid"><label>Guest Name<input id="reviewGuest" placeholder="Guest name"></label><label>Receptionist Name<input id="reviewReceptionist" placeholder="Receptionist name"></label></div></div>
+        <div id="reviewResultCard" class="panel messagePanel" hidden><div class="panelTitleRow"><div><span class="eyebrow">READY TO SEND</span><h3>Google Review Message</h3></div><button id="reviewCopy" class="primary">Copy Message</button></div><textarea id="reviewResult" rows="13" readonly></textarea><p class="copyStatus" id="reviewCopyStatus"></p></div>
+      </div>
+    </section>
+
+    <section id="spielsView" hidden>
+      <div class="pageHead"><div><span class="eyebrow">RECEPTION</span><h2>Reception Scripts</h2><p>Quick scripts for check-in and check-out conversations.</p></div><button class="backBtn" data-home>← Back to tasks</button></div>
+      <div class="subTabs"><button class="chip active" data-spiel="checkin">Check-In Script</button><button class="chip" data-spiel="checkout">Check-Out Script</button></div>
+      <div id="spielContent" class="panel spielCard"></div>
+    </section>
+  </main>
+</div>
+
+<dialog id="copyDlg">
+  <div class="copyDialog">
+    <div class="panelTitleRow"><div><span class="eyebrow">WHATSAPP READY</span><h2 id="copyTitle"></h2></div><button class="iconBtn" data-close aria-label="Close">×</button></div>
+    <p class="muted">Review or fill any placeholders, then copy and send.</p>
+    <textarea id="copyBody" rows="22"></textarea>
+    <div class="dialogFooter"><span id="copyStatus" class="copyStatus"></span><button id="copyBtn" class="primary">Copy Message</button></div>
+  </div>
+</dialog>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
