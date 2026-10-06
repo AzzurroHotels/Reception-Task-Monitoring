@@ -143,7 +143,7 @@ const OLYMPIC_ROOMS={
 18:["2nd level","shared"],
 19:["2nd level","ensuite"],
 20:["2nd level","shared"],
-21:["2nd level","ensuite"],
+21:["2nd level","shared"],
 22:["2nd level","ensuite"],
 23:["2nd level","shared"],
 24:["2nd level","shared"],
