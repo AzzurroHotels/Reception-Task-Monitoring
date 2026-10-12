@@ -143,7 +143,7 @@ const OLYMPIC_ROOMS={
 18:["2nd level","shared"],
 19:["2nd level","ensuite"],
 20:["2nd level","shared"],
-21:["2nd level","shared"],
+21:["2nd level","ensuite"],
 22:["2nd level","ensuite"],
 23:["2nd level","shared"],
 24:["2nd level","shared"],
@@ -199,9 +199,10 @@ function generateCheckin(){
    if(!guest||!receptionist||!room||!door||!info){$("#ciResultCard").hidden=true;$("#ciOlympicInfo").textContent=room?"Room number not found in Olympic room list.":"Select/enter an Olympic room number.";return}
    if(info[1]==="owner"){$("#ciResultCard").hidden=true;$("#ciOlympicInfo").textContent=`Room ${room} is marked Owner Occupied.`;return}
    const level=info[0],shared=info[1]==="shared";
-   $("#ciOlympicInfo").innerHTML=`<b>Detected:</b> Room ${esc(room)} · ${esc(level)} · ${shared?"Shared Bathroom":"Ensuite Bathroom"}${room==="12"?" · Digital Door Lock Code 3570":""}`;
+   const lockCode=({"12":"3570","18":"3790","20":"3680"})[room];
+   $("#ciOlympicInfo").innerHTML=`<b>Detected:</b> Room ${esc(room)} · ${esc(level)} · ${shared?"Shared Bathroom":"Ensuite Bathroom"}${lockCode?` · Eufy Lock Code ${lockCode}`:""}`;
    const baths=shared?`\n\n${OLY_BATH[level]}`:"";
-   const roomAccess=room==="12"?`\n\nRoom 12 Door Lock Code: 3570\nUse this code to access the digital door lock for Room 12.`:"";
+   const roomAccess=lockCode?`\n\nRoom ${room} Eufy Lock Code: ${lockCode}\nUse this code to access the Eufy door lock for Room ${room}.`:"";
    $("#ciResult").value=`Hi ${guest},
 
 We're delighted to have you stay with us.
@@ -358,9 +359,6 @@ function renderSpiel(type){
  document.querySelectorAll("[data-spiel]").forEach(b=>b.classList.toggle("active",b.dataset.spiel===type));
  $("#spielContent").innerHTML=SPIELS[type];
 }
-
-
-
 
 document.addEventListener("click",e=>{const b=e.target.closest("[data-spiel]");if(b)renderSpiel(b.dataset.spiel)});
 renderProperty();
